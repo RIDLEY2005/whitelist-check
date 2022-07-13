@@ -42,6 +42,13 @@ await Promise.all([
 
 console.log('Whitelist Check Completed!');
 
+const getBalance = async (who) => fmt(await stdlib.balanceOf(who));
+
+const balAlice = await getBalance(accAlice);
+const balBob = await getBalance(accBob);
+console.log(`Alice has ${balAlice}`);
+console.log(`Bob has ${balBob}`);
+
 
 
 
