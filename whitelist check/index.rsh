@@ -1,5 +1,5 @@
 "reach 0.1";
-//Player abilities
+//Common abilities
 const Player = {
   verification: Fun([Bool], Null),
 };
@@ -16,14 +16,13 @@ export const main = Reach.App(() => {
     allSet: Fun([], Bool),
   });
   init();
-//Alice wager and the deadline for the timeout
+//Alice getting Bobs address
   Alice.only(() => {
     
     const addBob = declassify(interact.bobAdd())
   });
   Alice.publish(addBob)
   commit();
-//Bob accepting or rejecting the wager
   Bob.only(() => {
     const set = declassify(interact.allSet())
   });
@@ -31,7 +30,8 @@ export const main = Reach.App(() => {
   const whiteList = new Set();
   whiteList.insert(Bob);
   commit();
-
+  
+//white-list check
 if(whiteList.member(addBob)){
   each([Alice, Bob], () => interact.verification(true));
 }else{
